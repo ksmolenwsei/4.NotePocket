@@ -14,3 +14,24 @@ body{
     text-align: center;
     font-size: 50px;
 }
+#buttonAddNote{
+    position: relative;
+    border: 6px solid green;
+    width: 120px;
+    height: 50px;
+    text-align: center;
+    background-color: white;
+    font-weight: 900;
+    top: 200px;
+    left: 50px;
+}
+#popUpWindowWithForm{
+    position: absolute;
+    border: 5px solid black;
+    width: 50%;
+    height: 50%;
+    background-color: blueviolet;
+    left:50%;
+    margin-left:-25%;
+    display: none;
+}
