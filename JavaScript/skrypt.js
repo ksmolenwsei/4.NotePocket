@@ -1,7 +1,31 @@
 let addNoteButton = document.querySelector("#buttonAddNote")
 let popup = document.querySelector("#popUpWindowWithForm")
+let submitForm = document.querySelector("#submitButton")
 
-console.log(addNoteButton)
+function getFormValues(){
+    let values = new Array(
+        document.querySelector("#title").value,
+        document.querySelector("#value").value
+    )
+    return values
+}
+
+
+
+
 addNoteButton.addEventListener('click', function(){
-    popup.style.display = "block"
-});
+    if(popup.style.display == "none")
+    {
+        popup.style.display = "block"
+    }
+    else
+    {
+        popup.style.display = "none"
+    }
+})
+
+
+submitForm.addEventListener("click", function(){
+    let values = getFormValues()
+    console.log(values[0])
+})

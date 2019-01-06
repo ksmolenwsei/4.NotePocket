@@ -35,3 +35,10 @@ body{
     margin-left:-25%;
     display: none;
 }
+form{
+    position: static;
+}
+form input{
+    display: block;
+    margin: 50px;
+}
