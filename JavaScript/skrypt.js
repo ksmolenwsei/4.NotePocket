@@ -3,7 +3,7 @@ let popup = document.querySelector("#popUpWindowWithForm")
 let submitForm = document.querySelector("#submitButton")
 
 function getFormValues(){
-    let values = new Array(
+    let values = localStorage.setItem(
         document.querySelector("#title").value,
         document.querySelector("#value").value
     )
@@ -27,5 +27,5 @@ addNoteButton.addEventListener('click', function(){
 
 submitForm.addEventListener("click", function(){
     let values = getFormValues()
-    console.log(values[0])
+    console.log(localStorage.getItem("aaa"))
 })
