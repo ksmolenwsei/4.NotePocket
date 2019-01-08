@@ -59,6 +59,7 @@ form input{
     margin: 15px;
     padding: 15px;
     background-color: aliceblue;
+    position: relative;
 }
 .exit1, .exit2{
     width: 20px;

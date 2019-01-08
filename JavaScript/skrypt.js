@@ -3,7 +3,11 @@ let popup = document.querySelector("#popUpWindowWithForm")
 let submitForm = document.querySelector("#submitButton")
 let tasksID = document.querySelector('#tasks')
 
-function displayNote(retrievedObject){
+
+
+ 
+
+function displayNote(retrievedObject, id){
     let divForTask = document.createElement("div")
     divForTask.style.backgroundColor = retrievedObject.color
     divForTask.classList.add("task")
@@ -12,6 +16,12 @@ function displayNote(retrievedObject){
     let exitButton = document.createElement("div")
     exitButton.classList.add("exitbutton")
     divForTask.appendChild(exitButton)
+    exitButton.addEventListener("click", function(){
+        if (confirm('Czy chcesz usunąć tę notatkę?')) {
+            localStorage.removeItem(id)
+            location.reload()
+        }
+    })
 
     let exit1 = document.createElement("div")
     let exit2 = document.createElement("div")
@@ -71,5 +81,6 @@ submitForm.addEventListener("click", function(){
 for(i in localStorage)
 {
     let retrievedObject = JSON.parse(localStorage.getItem(i))
-    displayNote(retrievedObject)
+    console.log(i)
+    displayNote(retrievedObject, i)
 }
