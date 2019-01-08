@@ -9,10 +9,12 @@ function getAndSetFormValues(){
     // let date = new Date()
     // let fullDate = leadingZero(date.getHours()) + ':' + leadingZero(date.getMinutes()) + ':' + leadingZero(date.getSeconds() + " " + leadingZero(date.getDate()) + "." + leadingZero(date.getMonth()+1) + "." + date.getFullYear())
     // console.log(fullDate)
+    let dropdown = document.querySelector("select")
     let data = {
     'title': document.querySelector("#title").value,
     'value': document.querySelector("#value").value,
-    'date': new Date()
+    'date': new Date(),
+    'color': dropdown.options[dropdown.selectedIndex].value
 
     }
     localStorage.setItem(localStorage.length + 1, JSON.stringify(data))
@@ -40,10 +42,11 @@ submitForm.addEventListener("click", function(){
 for(let i = 1; i<= localStorage.length; i++)
 {
     let retrievedObject = JSON.parse(localStorage.getItem(i))
-    console.log(retrievedObject.date)
+    console.log(retrievedObject)
 
 
     let divForTask = document.createElement("div")
+    divForTask.style.backgroundColor = retrievedObject.color
     divForTask.classList.add("task")
     tasksID.appendChild(divForTask)
 
@@ -55,8 +58,5 @@ for(let i = 1; i<= localStorage.length; i++)
     placeForValue.innerText = retrievedObject.value
     divForTask.appendChild(placeForValue)
 
-
-
-    
 
 }
