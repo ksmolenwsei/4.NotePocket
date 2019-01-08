@@ -2,15 +2,16 @@ let addNoteButton = document.querySelector("#buttonAddNote")
 let popup = document.querySelector("#popUpWindowWithForm")
 let submitForm = document.querySelector("#submitButton")
 
-function getFormValues(){
-    let values = localStorage.setItem(
-        document.querySelector("#title").value,
-        document.querySelector("#value").value
-    )
-    return values
+function getAndSetFormValues(){
+  
+    let data = {
+    'title': document.querySelector("#title").value,
+    'value': document.querySelector("#value").value,
+    'date': Date.now()
+
+    }
+    localStorage.setItem(localStorage.length + 1, JSON.stringify(data))
 }
-
-
 
 
 addNoteButton.addEventListener('click', function(){
@@ -26,6 +27,13 @@ addNoteButton.addEventListener('click', function(){
 
 
 submitForm.addEventListener("click", function(){
-    let values = getFormValues()
-    console.log(localStorage.getItem("aaa"))
+    let values = getAndSetFormValues()
+
 })
+
+
+for(let i = 1; i<= localStorage.length; i++)
+{
+    let retrievedObject = JSON.parse(localStorage.getItem(i))
+    console.log(retrievedObject)
+}
