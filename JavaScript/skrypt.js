@@ -3,7 +3,36 @@ let popup = document.querySelector("#popUpWindowWithForm")
 let submitForm = document.querySelector("#submitButton")
 let tasksID = document.querySelector('#tasks')
 
+function displayNote(retrievedObject){
+    let divForTask = document.createElement("div")
+    divForTask.style.backgroundColor = retrievedObject.color
+    divForTask.classList.add("task")
+    tasksID.appendChild(divForTask)
 
+    let exitButton = document.createElement("div")
+    exitButton.classList.add("exitbutton")
+    divForTask.appendChild(exitButton)
+
+    let exit1 = document.createElement("div")
+    let exit2 = document.createElement("div")
+    exit1.classList.add("exit1")
+    exit2.classList.add("exit2")
+
+    exitButton.appendChild(exit1)
+    exitButton.appendChild(exit2)
+
+    let h2ForTitle = document.createElement("h2")
+    h2ForTitle.innerText = retrievedObject.title
+    divForTask.appendChild(h2ForTitle)
+
+    let placeForValue = document.createElement("h3")
+    placeForValue.innerText = retrievedObject.value
+    divForTask.appendChild(placeForValue)
+
+    let placeForDate = document.createElement("h4")
+    placeForDate.innerText = retrievedObject.date
+    divForTask.appendChild(placeForDate)
+}
 
 function getAndSetFormValues(){
     // let date = new Date()
@@ -39,24 +68,8 @@ submitForm.addEventListener("click", function(){
 })
 
 
-for(let i = 1; i<= localStorage.length; i++)
+for(i in localStorage)
 {
     let retrievedObject = JSON.parse(localStorage.getItem(i))
-    console.log(retrievedObject)
-
-
-    let divForTask = document.createElement("div")
-    divForTask.style.backgroundColor = retrievedObject.color
-    divForTask.classList.add("task")
-    tasksID.appendChild(divForTask)
-
-    let h2ForTitle = document.createElement("h2")
-    h2ForTitle.innerText = retrievedObject.title
-    divForTask.appendChild(h2ForTitle)
-
-    let placeForValue = document.createElement("h3")
-    placeForValue.innerText = retrievedObject.value
-    divForTask.appendChild(placeForValue)
-
-
+    displayNote(retrievedObject)
 }

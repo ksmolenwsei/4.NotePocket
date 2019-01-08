@@ -52,10 +52,27 @@ form input{
     margin: auto;
     top:300px;
     padding: 15px;
+    line-height: 50%;
 }
 .task{
     /* border: 4px solid blue; */
     margin: 15px;
     padding: 15px;
     background-color: aliceblue;
+}
+.exit1, .exit2{
+    width: 20px;
+    height: 5px;
+    position: relative;
+    background-color: black;
+}
+.exit1{
+   transform: rotate(45deg);
+}
+.exit2{
+    transform: rotate(-45deg);
+    bottom: 5px;
+}
+.exitbutton{
+    right: 0px;
 }
