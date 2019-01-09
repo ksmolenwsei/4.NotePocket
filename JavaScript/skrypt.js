@@ -9,6 +9,10 @@ function pinOnTopButton(divForTask){
     button.classList.add("pinontop")
     button.innerText = "Przypnij notkę"
     divForTask.appendChild(button)
+    
+    button.addEventListener("click", function(){
+        this.parentNode.parentNode.prepend(this.parentNode)
+    })
 }
 
 
@@ -56,8 +60,6 @@ function displayNote(retrievedObject, id){
     // let fullDate = leadingZero(date.getHours()) + ':' + leadingZero(date.getMinutes()) + ':' + leadingZero(date.getSeconds() + " " + leadingZero(date.getDate()) + "." + leadingZero(date.getMonth()+1) + "." + date.getFullYear())
     // console.log(fullDate)
 
-
-
 addNoteButton.addEventListener('click', function(){
     if(popup.style.display == "none")
     {
@@ -68,9 +70,6 @@ addNoteButton.addEventListener('click', function(){
         popup.style.display = "none"
     }
 })
-
-
-
 
 class Note {
     constructor(){
@@ -85,21 +84,12 @@ class Note {
     }  
 }
 
-
-
-
-
-
-
 submitForm.addEventListener("click", function(){
     let note = new Note()
-    console.log(note)
 })
-
 
 for(i in localStorage)
 {
     let retrievedObject = JSON.parse(localStorage.getItem(i))
-    console.log(i)
     displayNote(retrievedObject, i)
 }
