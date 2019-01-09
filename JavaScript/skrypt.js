@@ -4,25 +4,18 @@ let submitForm = document.querySelector("#submitButton")
 let tasksID = document.querySelector('#tasks')
 
 
+function pinOnTopButton(divForTask){
+    let button = document.createElement("div")
+    button.classList.add("pinontop")
+    button.innerText = "Przypnij notkę"
+    divForTask.appendChild(button)
+}
 
- 
 
-function displayNote(retrievedObject, id){
-    let divForTask = document.createElement("div")
-    divForTask.style.backgroundColor = retrievedObject.color
-    divForTask.classList.add("task")
-    tasksID.appendChild(divForTask)
-
+function remove(id,divForTask) {
     let exitButton = document.createElement("div")
     exitButton.classList.add("exitbutton")
     divForTask.appendChild(exitButton)
-    exitButton.addEventListener("click", function(){
-        if (confirm('Czy chcesz usunąć tę notatkę?')) {
-            localStorage.removeItem(id)
-            location.reload()
-        }
-    })
-
     let exit1 = document.createElement("div")
     let exit2 = document.createElement("div")
     exit1.classList.add("exit1")
@@ -30,6 +23,21 @@ function displayNote(retrievedObject, id){
 
     exitButton.appendChild(exit1)
     exitButton.appendChild(exit2)
+    exitButton.addEventListener("click", function(){
+        if (confirm('Czy chcesz usunąć tę notatkę?')) {
+            localStorage.removeItem(id)
+            location.reload()
+        }
+    })
+}
+
+function displayNote(retrievedObject, id){
+    let divForTask = document.createElement("div")
+    divForTask.style.backgroundColor = retrievedObject.color
+    divForTask.classList.add("task")
+    tasksID.appendChild(divForTask)
+    remove(i,divForTask)
+    pinOnTopButton(divForTask)
 
     let h2ForTitle = document.createElement("h2")
     h2ForTitle.innerText = retrievedObject.title
@@ -44,20 +52,10 @@ function displayNote(retrievedObject, id){
     divForTask.appendChild(placeForDate)
 }
 
-function getAndSetFormValues(){
     // let date = new Date()
     // let fullDate = leadingZero(date.getHours()) + ':' + leadingZero(date.getMinutes()) + ':' + leadingZero(date.getSeconds() + " " + leadingZero(date.getDate()) + "." + leadingZero(date.getMonth()+1) + "." + date.getFullYear())
     // console.log(fullDate)
-    let dropdown = document.querySelector("select")
-    let data = {
-    'title': document.querySelector("#title").value,
-    'value': document.querySelector("#value").value,
-    'date': new Date(),
-    'color': dropdown.options[dropdown.selectedIndex].value
 
-    }
-    localStorage.setItem(localStorage.length + 1, JSON.stringify(data))
-}
 
 
 addNoteButton.addEventListener('click', function(){
@@ -72,9 +70,30 @@ addNoteButton.addEventListener('click', function(){
 })
 
 
-submitForm.addEventListener("click", function(){
-    let values = getAndSetFormValues()
 
+
+class Note {
+    constructor(){
+        let dropdown = document.querySelector("select")
+        let data = {
+        'title': document.querySelector("#title").value,
+        'value': document.querySelector("#value").value,
+        'date': new Date(),
+        'color': dropdown.options[dropdown.selectedIndex].value
+        }
+        localStorage.setItem(localStorage.length + 1, JSON.stringify(data))
+    }  
+}
+
+
+
+
+
+
+
+submitForm.addEventListener("click", function(){
+    let note = new Note()
+    console.log(note)
 })
 
 
