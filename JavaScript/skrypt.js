@@ -4,6 +4,7 @@ let submitForm = document.querySelector("#submitButton")
 let tasksID = document.querySelector('#tasks')
 
 
+// funkcja pinOnTopButton tworzy przycisk do przypinania notatki na górze listy, jako argument przyjmuje diva, w którym znajdują się notatki.
 function pinOnTopButton(divForTask){
     let button = document.createElement("div")
     button.classList.add("pinontop")
@@ -15,7 +16,7 @@ function pinOnTopButton(divForTask){
     })
 }
 
-
+//tworzy przycisk do kasowania notatki, jako argumenty przyjmuje ID notatki oraz diva, w którym się znajdują.
 function remove(id,divForTask) {
     let exitButton = document.createElement("div")
     exitButton.classList.add("exitbutton")
@@ -34,8 +35,8 @@ function remove(id,divForTask) {
         }
     })
 }
-
-function displayNote(retrievedObject, id){
+//wyświetla notatkę, pobiera klucz i wartość obiektu z local storage, przypisuje mu przyciski
+function displayNote(retrievedObject, i){
     let divForTask = document.createElement("div")
     divForTask.style.backgroundColor = retrievedObject.color
     divForTask.classList.add("task")
@@ -56,10 +57,8 @@ function displayNote(retrievedObject, id){
     divForTask.appendChild(placeForDate)
 }
 
-    // let date = new Date()
-    // let fullDate = leadingZero(date.getHours()) + ':' + leadingZero(date.getMinutes()) + ':' + leadingZero(date.getSeconds() + " " + leadingZero(date.getDate()) + "." + leadingZero(date.getMonth()+1) + "." + date.getFullYear())
-    // console.log(fullDate)
-
+   
+//efekt toogle dla formularza dodawania notatki
 addNoteButton.addEventListener('click', function(){
     if(popup.style.display == "none")
     {
@@ -71,23 +70,27 @@ addNoteButton.addEventListener('click', function(){
     }
 })
 
+//klasa której wywołanie skutkuje utworzeniem nowej notatki
 class Note {
     constructor(){
         let dropdown = document.querySelector("select")
+        let date = new Date()
+        let fullDate =  date.getDate() + "." + date.getMonth()+1 + "." + date.getFullYear() + "\t\t"+ date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+
         let data = {
         'title': document.querySelector("#title").value,
         'value': document.querySelector("#value").value,
-        'date': new Date(),
+        'date': fullDate,
         'color': dropdown.options[dropdown.selectedIndex].value
         }
         localStorage.setItem(localStorage.length + 1, JSON.stringify(data))
     }  
 }
-
+//po zatwierdzeniu formularza tworzy notkę z danymi pobranymi z pól 
 submitForm.addEventListener("click", function(){
     let note = new Note()
 })
-
+//po kolei wyświetla notatki
 for(i in localStorage)
 {
     let retrievedObject = JSON.parse(localStorage.getItem(i))
